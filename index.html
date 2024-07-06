@@ -69,13 +69,43 @@
 
             doc.setFont("times", "normal");
 
-            doc.text("COMPANY LETTER OF EMPLOYMENT", 20, 20);
+
+
+            // Centralize and bold the "COMPANY LETTER OF EMPLOYMENT" text
+            doc.setFont("times", "bold");
+            doc.setFontSize(16);
+            const companyLetterText = "COMPANY LETTER OF EMPLOYMENT";
+            const companyTextWidth = doc.getTextWidth(companyLetterText);
+            const pagesWidth = doc.internal.pageSize.getWidth();
+            let xPositions = (pagesWidth - companyTextWidth) / 2;
+            doc.text(companyLetterText, xPositions, 20);
+
+            doc.setFont("times", "normal");
+            doc.setFontSize(12);
+
+            
             doc.text(document.getElementById('date').value, 20, 30);
             doc.text(document.getElementById('employeeName').value, 20, 40);
             doc.text(document.getElementById('employeeAddress').value, 20, 50);
 
             doc.text("Dear " + document.getElementById('dearName').value, 20, 60);
-            doc.text("OFFER OF EMPLOYMENT", 20, 70);
+            
+
+
+            // Centralize and bold the "OFFER OF EMPLOYMENT" text
+            doc.setFont("times", "bold");
+            doc.setFontSize(16);
+            const offerText = "OFFER OF EMPLOYMENT";
+            const textWidth = doc.getTextWidth(offerText);
+            const pageWidth = doc.internal.pageSize.getWidth();
+            const xPosition = (pageWidth - textWidth) / 2;
+            doc.text(offerText, xPosition, 70);
+            doc.setFont("times", "normal");
+            doc.setFontSize(12);
+
+
+
+
             doc.text("Further to your application for employment with our company, we are pleased to offer you employment as a Marketing Personnel with effect from " +
                 document.getElementById('startDate').value + ". You shall be entitled to a monthly salary of N" + document.getElementById('salaryAmount').value +
                 " (" + document.getElementById('salaryAmount').value + " Naira) on the last working day of each month and may be reviewed as the Management may deem fit.", 20, 80, { maxWidth: 170 });
