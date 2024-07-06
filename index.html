@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Offer of Employment</title>
+    <style>
+        body {
+            font-family: Times New Roman, serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        p {
+            margin: 10px 0;
+        }
+        .input-field {
+            display: block;
+            margin: 10px 0;
+            padding: 5px;
+            width: 100%;
+            max-width: 500px;
+        }
+        .save-pdf-button {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <h1>(USE COMPANY LETTER HEAD)</h1>
+    <p><input type="date" class="input-field" id="date" placeholder="Date"></p>
+    <p><input type="text" class="input-field" id="employeeName" placeholder="Name of Employee"></p>
+    <p><input type="text" class="input-field" id="employeeAddress" placeholder="Employee's Address"></p>
+
+    <p>Dear <input type="text" class="input-field" id="dearName" placeholder="Employee's Name"></p>
+    <h2>OFFER OF EMPLOYMENT</h2>
+    <p>Further to your application for employment with our company, we are pleased to offer you employment
+        as a Marketing Personnel with effect from <input type="date" class="input-field" id="startDate" placeholder="Start Date">. You shall be entitled to a monthly
+        salary of N<input type="number" class="input-field" id="salaryAmount" placeholder="Salary Amount"> (input the amount in words here) Naira) on the last working day of each month and may be reviewed
+        as the Management may deem fit.</p>
+
+    <p>Please note that your entitlements are subject to tax and pension deductions, in accordance with the
+        law and you are to ensure that you provide a cell phone and laptop for your use, with internet access, in
+        the course of your employment.</p>
+
+    <p>You shall undergo a one week unpaid training. Also, you shall be on probation for a period of three
+        months. At the end of the period of probation, and upon satisfactory performance and conduct, your
+        employment will be confirmed.</p>
+
+    <p>The full terms and conditions of your employment are contained in the contract of employment
+        attached. Should our offer of employment be acceptable to you, please sign the attached copy of the
+        contract of employment and return same to the undersigned within two days.</p>
+
+    <p>We welcome you to the firm and look forward to a mutually rewarding relationship.</p>
+    <p>Yours faithfully,</p>
+
+    <p>.............................................................</p>
+
+    <div class="save-pdf-button">
+        <button onclick="saveAsPDF()">Save as PDF</button>
+    </div>
+
+    <script>
+        function saveAsPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFont("times", "normal");
+
+            doc.text("(USE COMPANY LETTER HEAD)", 20, 20);
+            doc.text(document.getElementById('date').value, 20, 30);
+            doc.text(document.getElementById('employeeName').value, 20, 40);
+            doc.text(document.getElementById('employeeAddress').value, 20, 50);
+
+            doc.text("Dear " + document.getElementById('dearName').value, 20, 60);
+            doc.text("OFFER OF EMPLOYMENT", 20, 70);
+            doc.text("Further to your application for employment with our company, we are pleased to offer you employment as a Marketing Personnel with effect from " +
+                document.getElementById('startDate').value + ". You shall be entitled to a monthly salary of N" + document.getElementById('salaryAmount').value +
+                " (" + document.getElementById('salaryAmount').value + " Naira) on the last working day of each month and may be reviewed as the Management may deem fit.", 20, 80, { maxWidth: 170 });
+
+            doc.text("Please note that your entitlements are subject to tax and pension deductions, in accordance with the law and you are to ensure that you provide a cell phone and laptop for your use, with internet access, in the course of your employment.", 20, 120, { maxWidth: 170 });
+
+            doc.text("You shall undergo a one week unpaid training. Also, you shall be on probation for a period of three months. At the end of the period of probation, and upon satisfactory performance and conduct, your employment will be confirmed.", 20, 150, { maxWidth: 170 });
+
+            doc.text("The full terms and conditions of your employment are contained in the contract of employment attached. Should our offer of employment be acceptable to you, please sign the attached copy of the contract of employment and return same to the undersigned within two days.", 20, 180, { maxWidth: 170 });
+
+            doc.text("We welcome you to the firm and look forward to a mutually rewarding relationship.", 20, 210, { maxWidth: 170 });
+            doc.text("Yours faithfully,", 20, 240);
+            doc.text(".............................................................", 20, 260);
+
+            doc.save('Offer_of_Employment.pdf');
+        }
+    </script>
+</body>
+</html>
